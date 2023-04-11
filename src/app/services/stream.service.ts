@@ -15,7 +15,7 @@ export class StreamService {
     localVideoTrack: null,
   };
   options = {
-    appId: "",  // set your appid here
+    appId: "75ccc470245d4049a4dc9fe572cca259",  // set your appid here
     channel: "test", // Set the channel name.
     // token: '', // Pass a token if your project enables the App Certificate.
     // uid: null
@@ -31,9 +31,9 @@ export class StreamService {
 
 
   // To join a call with tracks (video or audio)
-  async localUser(token, uuid) {
+  async localUser( uuid) {
     const uid = await this.rtc.client.join(this.options.appId, this.options.channel,
-      token, uuid);
+      this.options.appId, uuid);
     // Create an audio track from the audio sampled by a microphone.
     this.rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
     // Create a video track from the video captured by a camera.
@@ -91,14 +91,14 @@ export class StreamService {
   }
 
   // rtc token
-  async generateTokenAndUid(uid) {
+  // async generateTokenAndUid(uid) {
 
-    let url = 'https://test-agora.herokuapp.com/access_token?';
-    const opts = { params: new HttpParams({ fromString: "channel=test&uid=" + uid }) };
-    const data = await this.api.getRequest(url, opts.params).toPromise();
-    return { 'uid': uid, token: data['token'] }
+  //   let url = 'https://test-agora.herokuapp.com/access_token?';
+  //   const opts = { params: new HttpParams({ fromString: "channel=test&uid=" + uid }) };
+  //   const data = await this.api.getRequest(url, opts.params).toPromise();
+  //   return { 'uid': uid, token: data['token'] }
 
-  }
+  // }
 
   generateUid() {
     const length = 5;
